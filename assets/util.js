@@ -192,3 +192,82 @@ function getCartTotal() {
     }
     return total;
 }
+
+//generate random paragraph of text
+function setRandomText() {
+    //get random paragraph
+
+}
+
+//function PopupInfo show the information of a schedule item based on id in csv file
+function popupInfo(id) {
+    //
+    let request = new XMLHttpRequest();
+    request.open('GET', 'https://baconipsum.com/api/?type=meat-and-filler', true);
+    request.onload = function () {
+        //get json object
+        let data = JSON.parse(this.response);
+        //insert paragraph into passed id
+        alert(schedule_data[id - 1][0] + "\n\r" + data[0]);
+    }
+    //send request
+    request.send();
+
+}
+
+let schedule_data = [];
+
+//parse data from csv file
+function setSchedule(id, src) {
+    //get csv file
+    let request = new XMLHttpRequest();
+    request.open('GET', src, true);
+    request.onload = function () {
+        //get csv data
+        let data = this.response;
+        //split csv data into lines
+        let lines = data.split("\r");
+        //split lines into arrays
+        for (let i = 0; i < lines.length; i++) {
+            lines[i] = lines[i].split(",");
+        }
+        //return data
+        data = lines;
+        //Name_EN,Name_FR,Location,Date,Start time,End time,Type
+        let content = "<table class=\"table table-striped\">\n" +
+            "  <thead>\n" +
+            "    <tr>\n" +
+            "      <th scope=\"col\">#</th>\n" +
+            "      <th scope=\"col\">" + data[0][0] + "</th>\n" +
+            "      <th scope=\"col\">" + data[0][2] + "</th>\n" +
+            "      <th scope=\"col\">" + data[0][3] + "</th>\n" +
+            "      <th scope=\"col\">" + data[0][4] + "</th>\n" +
+            "      <th scope=\"col\">" + data[0][5] + "</th>\n" +
+            "      <th scope=\"col\">" + data[0][6] + "</th>\n" +
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>";
+
+        //loop through csv data
+        for (let i = 1; i < data.length; i++) {
+            schedule_data.push(data[i]);
+            content += "<tr class='schedule-item' " +
+                "\n onclick='popupInfo(" + i + ")'>" +
+                "      <th scope=\"row\">" + (i) + "</th>\n" +
+                "      <td>" + data[i][0] + "</td>\n" +
+                "      <td>" + data[i][2] + "</td>\n" +
+                "      <td>" + data[i][3] + "</td>\n" +
+                "      <td>" + data[i][4] + "</td>\n" +
+                "      <td>" + data[i][5] + "</td>\n" +
+                "      <td>" + data[i][6] + "</td>\n" +
+                "    </tr>";
+        }
+        //close schedule grid
+        content += "</tbody>\n" +
+            "</table>";
+        //insert schedule grid into passed id
+        document.getElementById(id).innerHTML = content;
+    }
+    //send request
+    request.send();
+}
