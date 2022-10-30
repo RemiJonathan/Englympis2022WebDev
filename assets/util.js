@@ -21,7 +21,7 @@ function setLogo(id, src) {
 }
 
 //create nav menu
-function setNav(id, content) {
+function setNav(id, root) {
     //Tickets
     // Programmation
     // Practical info
@@ -35,22 +35,22 @@ function setNav(id, content) {
         "  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n" +
         "    <ul class=\"navbar-nav mr-auto\">\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"./\">Home</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "\">Home</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"tickets/\">Tickets</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "tickets/\">Tickets</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"schedule/\">Schedule</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "schedule/\">Schedule</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"info/\">Practical Info</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "info/\">Practical Info</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"faq/\">FAQ</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "faq/\">FAQ</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"contact/\">Contact Us</a>\n" +
+        "        <a class=\"nav-link\" href=\"" + root + "contact/\">Contact Us</a>\n" +
         "      </li>\n" +
         "    </ul>\n" +
         "  </div>\n" +
@@ -89,4 +89,106 @@ function setCountdown(date) {
             document.getElementById("countdown").innerHTML = "Ongoing!";
         }
     }, 1000);
+}
+
+//make a bootstrap table based on content of a json file
+function setTable(id, src) {
+    //get json file
+    let request = new XMLHttpRequest();
+    request.open('GET', src, true);
+    request.onload = function () {
+        //get json object
+
+        let data = JSON.parse(this.response).packages;
+        console.log(data);
+        let packages = [];
+        for (let i in data) {
+            packages.push(data[i]);
+        }
+        console.log(packages);
+        //create table
+        let content = "<table class=\"table table-striped\">\n" +
+            "  <thead>\n" +
+            "    <tr>\n" +
+            "      <th scope=\"col\">#</th>\n" +
+            "      <th scope=\"col\">Name</th>\n" +
+            "      <th scope=\"col\">Price</th>\n" +
+            "      <th scope=\"col\">Description</th>\n" +
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>";
+
+        //loop through json object
+        for (let i = 0; i < packages.length; i++) {
+            console.log(packages[i]);
+            content += "<tr>\n" +
+                "      <th scope=\"row\">" + (i + 1) + "</th>\n" +
+                "      <td>" + packages[i].display_name + "</td>\n" +
+                "      <td>" + formatPrice(packages[i].price) + "</td>\n" +
+                "      <td>" + packages[i].description_en + "</td>\n" +
+                "<td><button onclick='addToCart(" + i + ",\"../input/tickets.json\")'>Add to cart</button></td>"
+            "    </tr>";
+        }
+        //close table
+        content += "</tbody>\n" +
+            "</table>";
+        console.log(content);
+        //insert table into passed id
+        document.getElementById(id).innerHTML = content;
+    }
+    //send request
+    request.send();
+}
+
+//format number as price
+function formatPrice(price) {
+    return "$" + price.toFixed(2);
+}
+
+//add item to cart
+function addToCart(index, src) {
+    //get json file
+    let request = new XMLHttpRequest();
+    request.open('GET', src, true);
+    request.onload = function () {
+        //get json object
+        let packages = [];
+        let data = JSON.parse(this.response).packages;
+        for (let i in data) {
+            packages.push(data[i]);
+        }
+        console.log(packages);
+        //add item to cart
+        cart.push(packages[index]);
+        //update cart
+        updateCart(cart);
+    }
+    //send request
+    request.send();
+}
+
+//update cart
+function updateCart() {
+    console.log(cart);
+    //get cart div
+    let cartDiv = document.getElementById("cart");
+    //clear cart div
+    cartDiv.innerHTML = "<h4>Cart</h4>";
+    //loop through cart
+    for (let i = 0; i < cart.length; i++) {
+        //add item to cart div
+        cartDiv.innerHTML += "<p>" + cart[i].display_name + " - " + formatPrice(cart[i].price) + "</p>";
+    }
+    //add total to cart div
+    cartDiv.innerHTML += "<p>Total: " + formatPrice(getCartTotal()) + "</p>";
+}
+
+let cart = [];
+
+function getCartTotal() {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+        total += cart[i].price;
+    }
+    return total;
 }

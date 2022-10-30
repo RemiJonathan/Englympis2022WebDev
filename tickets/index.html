@@ -5,7 +5,7 @@
     <!--Bootstrap meta tag-->
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <title>Potato Cloud Fest</title>
+    <title>Tickets - Potato Cloud Fest</title>
 </head>
 
 <!--import Bootstrap 5.1 CSS-->
@@ -17,6 +17,15 @@
     <div id="content">
         <div id="nav"></div>
         <div class="container">
+            <!--add table div-->
+            <div id="table"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="cart"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -29,8 +38,12 @@
 <!--Import jquery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--Import local scripts-->
-<script src="assets/scripts.js"></script>
+<script src="../assets/scripts.js"></script>
 <!--Import util scripts-->
-<script src="assets/util.js"></script>
+<script src="../assets/util.js"></script>
+<script>
+    setNav("nav", "../");
+    setTable("table", "../input/tickets.json");
+</script>
 </body>
 </html>

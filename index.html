@@ -49,14 +49,14 @@
         setJumbotron("jumbo", "Next iteration 26-27 January 2023", "2023-01-26");
         setLogo("logo", "assets/logo.png");
         setCountdown("2023-01-26");
-        setNav("nav");
+        setNav("nav", "");
     </script>
 
     <!-- Google map code from EZ Map - https://ezmap.co -->
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDWTEUJxuoQ6tQuNIHESfBZSmiZODjscc4&libraries=visualization'></script>
     <script>
         function init() {
-            var mapOptions = {
+            let mapOptions = {
                 "center": {"lat": 45.51029740179825, "lng": -73.55453916921914},
                 "clickableIcons": true,
                 "disableDoubleClickZoom": false,
@@ -83,19 +83,19 @@
                 "zoom": 12,
                 "zoomControl": true
             };
-            var mapElement = document.getElementById('ez-map');
-            var map = new google.maps.Map(mapElement, mapOptions);
-            var marker0 = new google.maps.Marker({
+            let mapElement = document.getElementById('ez-map');
+            let map = new google.maps.Map(mapElement, mapOptions);
+            let marker0 = new google.maps.Marker({
                 title: "No Title",
                 icon: "https://maps.google.com/mapfiles/kml/paddle/red-blank.png",
                 position: new google.maps.LatLng(45.50500197264866, -73.54825958343865),
                 map: map
             });
-            var heatmap = new google.maps.visualization.HeatmapLayer({data: []});
+            let heatmap = new google.maps.visualization.HeatmapLayer({data: []});
             heatmap.setOptions({"opacity": 0.6, "dissipating": false, "radius": 0});
             heatmap.setMap(map);
             window.addEventListener("resize", function () {
-                var center = map.getCenter();
+                let center = map.getCenter();
                 google.maps.event.trigger(map, "resize");
                 map.setCenter(center);
             });

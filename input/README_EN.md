@@ -47,7 +47,7 @@ The pricing page should contain:
      - Button to add to cart
 - Shopping cart that contains the added items
 
-### **Programming oage** (3 points)
+### **Programming page** (3 points)
 
 This page allows site visitors to view the full schedule.
 
