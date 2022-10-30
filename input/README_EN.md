@@ -27,9 +27,9 @@ The homepage should contain:
 - Location of the festival (Montreal)
 - The logo of the festival (your pick)
 - A menu with these different options:
-    - Tickets
-    - Programmation
-    - Practical info
+  - Tickets
+  - Schedule
+  - Practical info
     - FAQ
     - Contact Us
 - A countdown to the start of the event (January 26, 2023)

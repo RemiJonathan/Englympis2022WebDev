@@ -35,21 +35,22 @@ function setNav(id, content) {
         "  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n" +
         "    <ul class=\"navbar-nav mr-auto\">\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"#\">Home</a>\n" +
+        "        <a class=\"nav-link\" href=\"./\">Home</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"#\">Link</a>\n" +
+        "        <a class=\"nav-link\" href=\"tickets/\">Tickets</a>\n" +
         "      </li>\n" +
-        "      <li class=\"nav-item dropdown\">\n" +
-        "        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-        "          Dropdown\n" +
-        "        </a>\n" +
-        "        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n" +
-        "          <a class=\"dropdown-item\" href=\"tickets/\">Tickets</a>\n" +
-        "          <a class=\"dropdown-item\" href=\"#\">Another action</a>\n" +
-        "          <div class=\"dropdown-divider\"></div>\n" +
-        "          <a class=\"dropdown-item\" href=\"#\">Something else here</a>\n" +
-        "        </div>\n" +
+        "      <li class=\"nav-item\">\n" +
+        "        <a class=\"nav-link\" href=\"schedule/\">Schedule</a>\n" +
+        "      </li>\n" +
+        "      <li class=\"nav-item\">\n" +
+        "        <a class=\"nav-link\" href=\"info/\">Practical Info</a>\n" +
+        "      </li>\n" +
+        "      <li class=\"nav-item\">\n" +
+        "        <a class=\"nav-link\" href=\"faq/\">FAQ</a>\n" +
+        "      </li>\n" +
+        "      <li class=\"nav-item\">\n" +
+        "        <a class=\"nav-link\" href=\"contact/\">Contact Us</a>\n" +
         "      </li>\n" +
         "    </ul>\n" +
         "  </div>\n" +
